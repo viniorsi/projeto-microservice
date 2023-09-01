@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fpH3sZVLmJmro2+UX5JrtA3bqJWgo1hdbWYUl463BbkSVuuHRHJSeOUOrlPr/r/RMjk94LK4P3DzwgOMOIPCaA==",
+  "dgSpecHash": "VO2ayS0VSHDU2GyPfa2T3N3fk6v5fgHFy5CqShYqwqlaFOHXFWAglBlV4I4FQLANzzJRJmM34dMVSxHf0uIAIQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\logonrmlocal\\Desktop\\Fiap.cartao\\Fiap.cartao\\Fiap.cartao.csproj",
+  "projectFilePath": "C:\\Users\\logonrmlocal\\Source\\Repos\\projeto-microservice\\Fiap.cartao\\Fiap.cartao\\Fiap.cartao.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\logonrmlocal\\.nuget\\packages\\rabbitmq.client\\6.5.0\\rabbitmq.client.6.5.0.nupkg.sha512",
     "C:\\Users\\logonrmlocal\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",

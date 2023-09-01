@@ -26,7 +26,7 @@ namespace Fiap.cartao
             //função anonima model é a interação com a fila, e argument é o evento( mensagem no caso)
            
             var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (model, ea) =>
+            consumer.Received += async (model, ea) =>
             {
                 //pega a mensagem(ea) e o corpo da mensagem
                 var body = ea.Body.ToArray();
@@ -34,6 +34,16 @@ namespace Fiap.cartao
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine($" [x] recebido {message}");
 
+                var cartao = await ValidarCartao();
+
+                if(cartao is null)
+                {
+                    Console.WriteLine("Erro ao processar cartão");
+                    //tag, multiplo, reenfilerar
+                    channel.BasicNack(ea.DeliveryTag, false, false);
+                }
+
+                Console.WriteLine("Cartão valido com sucesso")
                 channel.BasicAck(ea.DeliveryTag, false);
 
 
@@ -48,5 +58,33 @@ namespace Fiap.cartao
             Console.WriteLine(" Pressione [enter] para finalizar.");
             Console.ReadLine();
         }
+
+        static void Task<Cartao> ValidarCartao()
+            {
+            var httpClient = new HttpClient();
+
+            var response = httpClient.GetFromJsonAsync<Cartao>("https://demo2458238.mockable.io/validar-cartao");
+
+            if (response == null)
+            {
+
+                Console.WriteLine("Erro ao validar cartão")
+                        ; return null;
+            }
+            return response;
+        }
+       
+    }
+    public class Cartao
+    {
+        public string idPedido { get; set; }
+
+        public string numeroCartao { get; set; }
+
+        public string portador { get; set; }
+
+        public int cvv { get; set; }
+
+        public string vencimento { get; set; }
     }
 }
